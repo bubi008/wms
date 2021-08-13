@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/datepicker/datepicker3.css">
+  <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/datepicker/datepicker3.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 </head>
