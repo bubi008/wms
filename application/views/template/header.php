@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php header("Cache-Control: public, max-age=60, s-maxage=60"); ?>
-  <title>WMS - Withhold Money System</title>
+  <title>APIK - Aplikasi Penatausahaan Internal Kas</title>
   <link rel="shortcut icon" href="<?= base_url(); ?>assets/img/rcs_logo.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css">

@@ -140,8 +140,9 @@ class CI_DB_Cache {
 	public function read($sql)
 	{
 		$segment_one = ($this->CI->uri->segment(1) == FALSE) ? 'default' : $this->CI->uri->segment(1);
-		$segment_two = ($this->CI->uri->segment(2) == FALSE) ? 'index' : $this->CI->uri->segment(2);
-		$filepath = $this->db->cachedir.$segment_one.'+'.$segment_two.'/'.md5($sql);
+		$segment_two = ($this->CI->uri->segment(2) == FALSE) ? 'index' : $this->CI->uri-> segment(2);
+		$segment_three = ($this->CI->uri->segment(3) == FALSE) ? 'index' : $this->CI->uri->segment(3);
+		$filepath = $this->db->cachedir.$segment_one.'+'.$segment_two.'+'.$segment_three.'/'.md5($sql);
 
 		if ( ! is_file($filepath) OR FALSE === ($cachedata = file_get_contents($filepath)))
 		{
@@ -164,7 +165,8 @@ class CI_DB_Cache {
 	{
 		$segment_one = ($this->CI->uri->segment(1) == FALSE) ? 'default' : $this->CI->uri->segment(1);
 		$segment_two = ($this->CI->uri->segment(2) == FALSE) ? 'index' : $this->CI->uri->segment(2);
-		$dir_path = $this->db->cachedir.$segment_one.'+'.$segment_two.'/';
+		$segment_three = ($this->CI->uri->segment(3) == FALSE) ? 'index' : $this->CI->uri->segment(3);
+		$dir_path = $this->db->cachedir.$segment_one.'+'.$segment_two.'+'.$segment_three.'/';
 		$filename = md5($sql);
 
 		if ( ! is_dir($dir_path) && ! @mkdir($dir_path, 0750))
@@ -202,7 +204,12 @@ class CI_DB_Cache {
 			$segment_two = ($this->CI->uri->segment(2) == FALSE) ? 'index' : $this->CI->uri->segment(2);
 		}
 
-		$dir_path = $this->db->cachedir.$segment_one.'+'.$segment_two.'/';
+		if ($segment_three === '')
+		{
+			$segment_three = ($this->CI->uri->segment(3) == FALSE) ? 'index' : $this->CI->uri->segment(3);
+		}
+
+		$dir_path = $this->db->cachedir.$segment_one.'+'.$segment_two.'+'.$segment_three.'/';
 		delete_files($dir_path, TRUE);
 	}
 
