@@ -13,7 +13,7 @@
      <!-- Brand Logo -->
      <a href="<?= base_url('beranda'); ?>" class="brand-link">
        <img src="<?= base_url(); ?>assets/img/rcs_logo.png" alt="RCS Logo" class="brand-image elevation-1" style="opacity: .8;">
-       <span class="brand-text font-weight-light">WMS</span>
+       <span class="brand-text font-weight-light">APIK</span>
      </a>
 
      <div class="sidebar">
@@ -148,23 +148,25 @@
                                <ul class="nav nav-treeview">
                                  <?php foreach (show_menus()['menu4'] as $m4) : ?>
                                    <?php if ($m4['menu3id'] == $m3['id']) : ?>
-                                     <li class="nav-item ml-3">
-                                       <a href="" class="nav-link">
+                                    <li class="nav-item has-treeview ml-3 <?= $m3['url'] == $this->uri->segment(3) ? 'menu-open' : ''; ?>">
+                                        <a href="<?= base_url() . $m4['url']; ?>" class="nav-link <?= $m4['url'] == $this->uri->segment(3) ? 'active' : ''; ?>">
                                          <i class="nav-icon fa fa-angle-right mr-0"></i>
                                          <p><?= $m4['nama']; ?> <?= $m4['jumlah'] > 0 ? '<i class="right fa fa-angle-left"></i>' : ''; ?></p>
                                        </a>
+                                       <?php if ($m4['jumlah'] > 0) : ?>
                                        <ul class="nav nav-treeview">
                                          <?php foreach (show_menus()['menu5'] as $m5) : ?>
                                            <?php if ($m5['menu4id'] == $m4['id']) : ?>
-                                             <li class="nav-item ml-3">
-                                               <a href="" class="nav-link">
+                                            <li class="nav-item has-treeview ml-3 <?= $m4['url'] == $this->uri->segment(2) ? 'menu-open' : ''; ?>">
+                                             <a href="<?= base_url() . $m5['url']; ?>" class="nav-link <?= $m5['url'] == $this->uri->segment(2) ? 'active' : ''; ?>">
                                                  <i class="nav-icon fa fa-angle-right mr-0"></i>
-                                                 <p><?= $m5['nama']; ?></p>
+                                                 <p><?= $m5['nama']; ?> <?= $m5['jumlah'] > 0 ? '<i class="right fa fa-angle-left"></i>' : '';?></p>
                                                </a>
                                              </li>
                                            <?php endif; ?>
                                          <?php endforeach; ?>
                                        </ul>
+                                       <?php endif; ?>
                                      </li>
                                    <?php endif; ?>
                                  <?php endforeach; ?>
