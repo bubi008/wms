@@ -49,7 +49,7 @@
 
 											<td>Rp <?= number_format($penerimaan->nominal, 0, ',', '.') ?></td>
 											<td>
-												<a href="<?= base_url('penerimaan/detail/' . $penerimaan->nomor) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+												<a href="<?= base_url('pengesahan/detail/' . $penerimaan->nomor) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
 												<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('penerimaan/tambah/' . $penerimaan->tanggal_pengesahan) ?>" value=today class="btn btn-success btn-sm">Setuju</i></a>
 											</td>
 										</tr>
