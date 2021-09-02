@@ -89,7 +89,7 @@ class Pengesahan extends CI_Controller
 		$this->data['all_detail_penerimaan'] = $this->master_transaksi_m->lihat_no_nota_penerimaan($nomor);
 		$this->data['no'] = 1;
 
-		$this->load->view('penerimaan/detail', $this->data);
+		$this->load->view('pengesahan/detail', $this->data);
 		$this->load->view('template/footer');
 	}
 
