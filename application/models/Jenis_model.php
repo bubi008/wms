@@ -4,9 +4,20 @@ class Jenis_model extends CI_Model {
 
 	protected $_table = 'jenis';
 
-    public function view(){
+    public function view_penerimaan(){
+		$this->db->having('id_kelompok=1');
         return $this->db->get('jenis')->result();
 	} 
+
+	public function view(){
+		$this->db->having('id_kelompok=1');
+        return $this->db->get('jenis')->result();
+	} 
+	
+    public function view_pengeluaran(){
+		$this->db->having('id_kelompok=2');
+        return $this->db->get('jenis')->result();
+	}
     public function view_by($id){
         $this->db->where('id', $id);
         return $this->db->get('jenis')->row();

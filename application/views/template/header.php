@@ -29,7 +29,7 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('welcome'); ?>"><i class="fa fa-power-off"></i> Keluar</a>
+          <a class="nav-link" href="<?= base_url('auth/logout'); ?>"><i class="fa fa-power-off"></i> Keluar</a>
         </li>
       </ul>
     </nav>

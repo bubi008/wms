@@ -4,8 +4,9 @@
 
 </head>
     <body>
+        
 <div class="container">
-    <h2>Members List</h2>
+    <h2>Data Bank</h2>
 	
     <!-- Display status message -->
     <?php if(!empty($success_msg)){ ?>
@@ -28,6 +29,10 @@
         </div>
 		
         <!-- File upload form -->
+        <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered table-hover">
+              <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css">
         <div class="col-md-12" id="importFrm" style="display: none;">
             <form action="<?php echo base_url('Import/import'); ?>" method="post" enctype="multipart/form-data">
                 <input type="file" name="file" />
@@ -58,7 +63,7 @@
                     <td><?php echo $row['virtual_account']; ?></td>
                 </tr>
                 <?php } }else{ ?>
-                <tr><td colspan="5">No member(s) found...</td></tr>
+                <tr><td colspan="5">Tidak ada data..</td></tr>
                 <?php } ?>
             </tbody>
         </table>

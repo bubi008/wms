@@ -2,7 +2,7 @@
 
 use Dompdf\Dompdf;
 
-class Penerimaan extends CI_Controller
+class Pengeluaran extends CI_Controller
 {
 	public function __construct()
 	{
@@ -12,7 +12,8 @@ class Penerimaan extends CI_Controller
 		$this->load->model('Penerimaan_model', 'penerimaan_m');
 		$this->load->model('Master_transaksi_model', 'master_transaksi_m');
 		$this->load->model('Jenis_model', 'jenis_m');
-		$this->data['aktif'] = 'nota_penerimaan';
+        $this->load->model('Pengeluaran_model', 'pengeluaran_m');
+		$this->data['aktif'] = 'nota_pengeluaran';
 	}
 
 	public function index()
@@ -20,13 +21,13 @@ class Penerimaan extends CI_Controller
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
 
-		$this->data['title'] = 'Data Nota Penerimaan';
-		$this->data['all_penerimaan'] = $this->penerimaan_m->view();
+		$this->data['title'] = 'Data Nota Pengeluaran';
+		$this->data['all_pengeluaran'] = $this->pengeluaran_m->view();
 
 		$this->data['title_j'] = 'Data Jenis';
-		$this->data['all_jenis'] = $this->jenis_m->view();
+		$this->data['all_jenis'] = $this->jenis_m->view_pengeluaran();
 
-		$this->load->view('penerimaan/index', $this->data);
+		$this->load->view('pengeluaran/index', $this->data);
 	}
 
 	public function tambah()
@@ -34,43 +35,43 @@ class Penerimaan extends CI_Controller
 		$this->load->view('template/header');
         $this->load->view('template/sidebar');
 
-		$this->data['title'] = 'Tambah Nota Penerimaan';
-		$this->data['all_bank'] = $this->bank_m->lihat_stok();
-		$this->data['all_jenis'] =$this->jenis_m->view_penerimaan();
+		$this->data['title'] = 'Tambah Nota Pengeluaran';
+		$this->data['all_master_transaksi'] = $this->master_transaksi_m->lihat_stok();
+		$this->data['all_jenis'] =$this->jenis_m->view_pengeluaran();
 
-		$this->load->view('penerimaan/tambah', $this->data);
+		$this->load->view('pengeluaran/tambah', $this->data);
 
 		$this->load->view('template/footer');
 	}
 
 	public function proses_tambah()
 	{
-		$jumlah_bank_dinotakan = count($this->input->post('idcsv_hidden'));
+		$jumlah_bank_dikeluarkan = count($this->input->post('idcsv_hidden'));
 
-		$data_nota_penerimaan = [
+		$data_nota_pengeluaran = [
 			'nomor' => $this->input->post('nomor'),
 			'tanggal_nota' => $this->input->post('tanggal_nota'),
 			'jenis_nota' => $this->input->post('nama_jenis'),
 			'nominal' => $this->input->post('total_hidden'),
 		];
 
-		$data_master_transaksi = [];
+		$data_master_pengeluaran = [];
 
-		for ($i = 0; $i < $jumlah_bank_dinotakan; $i++) {
-			array_push($data_master_transaksi, ['bank_idcsv' => $this->input->post('idcsv_hidden')[$i]]);
-			$data_master_transaksi[$i]['nota_penerimaan_id'] = $this->input->post('nomor');
-			$data_master_transaksi[$i]['nama_jenis'] = $this->input->post('nama_jenis');
-			$data_master_transaksi[$i]['jumlah_transaksi'] = $this->input->post('jumlah_hidden')[$i];
-			$data_master_transaksi[$i]['nominal'] = $this->input->post('nominal_hidden')[$i];
-			$data_master_transaksi[$i]['uraian'] = $this->input->post('uraian_hidden')[$i];
-			$data_master_transaksi[$i]['tanggal_idcsv'] = $this->input->post('tanggal_hidden')[$i];
-			$data_master_transaksi[$i]['tanggal_nota'] = $this->input->post('tanggal_nota');
+		for ($i = 0; $i < $jumlah_bank_dikeluarkan; $i++) {
+			array_push($data_master_pengeluaran, ['bank_idcsv' => $this->input->post('idcsv_hidden')[$i]]);
+			$data_master_pengeluaran[$i]['nota_penerimaan_id'] = $this->input->post('nomor');
+			$data_master_pengeluaran[$i]['nama_jenis'] = $this->input->post('nama_jenis');
+			$data_master_pengeluaran[$i]['jumlah_transaksi'] = $this->input->post('jumlah_hidden')[$i];
+			$data_master_pengeluaran[$i]['nominal'] = $this->input->post('nominal_hidden')[$i];
+			$data_master_pengeluaran[$i]['uraian'] = $this->input->post('uraian_hidden')[$i];
+			$data_master_pengeluaran[$i]['tanggal_idcsv'] = $this->input->post('tanggal_hidden')[$i];
+			$data_master_pengeluaran[$i]['tanggal_nota'] = $this->input->post('tanggal_nota');
 
 		}
 
-		if ($this->penerimaan_m->tambah($data_nota_penerimaan) && $this->master_transaksi_m->tambah($data_master_transaksi)) {
+		if ($this->penerimaan_m->tambah($data_nota_pengeluaran) && $this->master_transaksi_m->tambah($data_master_pengeluaran)) {
 			for ($i = 0; $i < $jumlah_bank_dinotakan; $i++) {
-				$this->bank_m->min_stok($data_master_transaksi[$i]['jumlah_transaksi'], $data_master_transaksi[$i]['bank_idcsv']) or die('gagal min stok');
+				$this->bank_m->min_stok($data_master_pengeluaran[$i]['jumlah_transaksi'], $data_master_pengeluaran[$i]['bank_idcsv']) or die('gagal min stok');
 			}
 			$this->session->set_flashdata('success', 'Nota <strong>Penerimaan</strong> Berhasil Dibuat!');
 			redirect('penerimaan');
@@ -85,7 +86,7 @@ class Penerimaan extends CI_Controller
 		$this->load->view('template/header');
         $this->load->view('template/sidebar');
 
-		$this->data['title'] = 'Detail Nota Penerimaan';
+		$this->data['title'] = 'Detail Nota Pengeluaran';
 		$this->data['penerimaan'] = $this->penerimaan_m->lihat_no_nota_penerimaan($nomor);
 		$this->data['all_detail_penerimaan'] = $this->master_transaksi_m->lihat_no_nota_penerimaan($nomor);
 		$this->data['no'] = 1;
@@ -106,9 +107,9 @@ class Penerimaan extends CI_Controller
 	}
 
 
-	public function get_all_bank()
+	public function get_all_master_transaksi()
 	{
-		$data = $this->bank_m->lihat_uraian($_POST['uraian']);
+		$data = $this->master_transaksi_m->lihat_uraian($_POST['uraian']);
 		echo json_encode($data);
 	}
 	public function get_all_jenis()
@@ -116,15 +117,15 @@ class Penerimaan extends CI_Controller
 		$data = $this->jenis_m->lihat_jenis($_POST['nama_jenis']);
 		echo json_encode($data);
 	}
-	public function keranjang_bank()
+	public function keranjang_transaksi()
 	{
-		$this->load->view('penerimaan/keranjang');
+		$this->load->view('pengeluaran/keranjang');
 	}
 
 	public function export()
 	{
 		$dompdf = new Dompdf();
-		$this->data['all_penerimaan'] = $this->penerimaan_m->view();
+		$this->data['all_pengeluaran'] = $this->pengeluaran_m->view();
 		$this->data['title'] = 'Laporan Data';
 		$this->data['no'] = 1;
 
@@ -140,13 +141,13 @@ class Penerimaan extends CI_Controller
 		$dompdf = new Dompdf();
 		$this->data['penerimaan'] = $this->penerimaan_m->lihat_no_nota_penerimaan($nomor);
 		$this->data['all_detail_penerimaan'] = $this->master_transaksi_m->lihat_no_nota_penerimaan($nomor);
-		$this->data['title'] = 'Nota Penerimaan';
+		$this->data['title'] = 'Nota Pengeluaran';
 		$this->data['no'] = 1;
 
 		$dompdf->setPaper('A4', 'Landscape');
 		$html = $this->load->view('penerimaan/detail_report', $this->data, true);
 		$dompdf->load_html($html);
 		$dompdf->render();
-		$dompdf->stream('Nota Penerimaan' . date('d F Y'), array("Attachment" => false));
+		$dompdf->stream('Nota Pengeluaran' . date('d F Y'), array("Attachment" => false));
 	}
 }

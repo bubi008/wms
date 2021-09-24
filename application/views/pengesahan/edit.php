@@ -1,21 +1,17 @@
 <html>
   <head>
     <title>Form Ubah - APIK</title>
-    <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-sm table-bordered table-hover">
-              <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css">
   </head>
   <body>
     <h1>Form Ubah Data Bank</h1>
     <hr>
     <!-- Menampilkan Error jika validasi tidak valid -->
     <div style="color: red;"><?php echo validation_errors(); ?></div>
-    <?php echo form_open("bank/ubah/".$bank->idcsv); ?>
+    <?php echo form_open("pengesahan/ubah/".$nota_penerimaan->id_np); ?>
       <table cellpadding="8">
         <tr>
-          <td>idcsv</td>
-          <td><input type="text" name="input_idcsv" value="<?php echo set_value('input_idcsv', $bank->idcsv); ?>" readonly></td>
+          <td>id_np</td>
+          <td><input type="text" name="input_id_np" value="<?php echo set_value('input_id_np', $nota_penerimaan->id_np); ?>" readonly></td>
         </tr>
         <tr>
           <td>Tanggal/td>
