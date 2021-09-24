@@ -11,7 +11,7 @@
 
 
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('penerimaan') ?>">
+			<div id="content" data-url="<?= base_url('pengeluaran') ?>">
 				<!-- load Topbar -->
 			
 
@@ -21,16 +21,16 @@
 							<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 						</div>
 						<div class="float-right">
-							<a href="<?= base_url('penerimaan') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
+							<a href="<?= base_url('pengeluaran') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
 						</div>
 					</div>
 					<hr>
 					<div class="row">
 						<div class="col">
 							<div class="card shadow">
-								<div class="card-header"><strong>Isi Form Dibawah Ini!</strong></div>
+								<div class="card-header"><strong>Isi Form Pengeluaran Dibawah Ini!</strong></div>
 								<div class="card-body">
-									<form action="<?= base_url('penerimaan/proses_tambah') ?>" id="form-tambah" method="POST">
+									<form action="<?= base_url('pengeluaran/proses_tambah') ?>" id="form-tambah" method="POST">
 										<h5>Jenis Transaksi</h5>
 										<hr>
 										<div class="form-row">
@@ -40,7 +40,7 @@
 											</div>
 											<div class="form-group col-2">
 												<label>Tanggal</label>
-												<input type="text" name="tanggal_nota" value="<?= date('Y/m/d') ?>" readonly class="form-control">
+												<input type="text" name="tanggal" value="<?= date('Y/m/d') ?>" readonly class="form-control">
 											</div>
 											<div class="form-group col-2">
 												<label>Jenis</label>
@@ -51,40 +51,7 @@
 														<option value="<?= $jenis->nama_jenis ?>"><?= $jenis->nama_jenis ?></option>
 													<?php endforeach ?>
 												</select>
-							
-											</div>
-											</div>
-											<div class="row"> 
 											
-  											<div class="col-sm-6">
-												  <label>Rincian Penerimaan Uang Hasil Lelang</label>
-   												 <div class="card">
-      											<div class="card-body">
-												<div class="form-group">
-                        	   					 <input type="number" id="hasil_bersih" value="hasil bersih lelang" class="form-control" placeholder="Hasil Bersih Lelang">
-                        						</div>
-                       						 <div class="form-group">
-                      							      <input type="number" id="bea_penjual" class="form-control" placeholder="Bea Lelang Penjual">
-                       							 </div>
-													<div class="form-group">
-                      							      <input type="number" id="pph_final" class="form-control" placeholder="PPh Final">
-                       							 </div>
-                        						<div class="form-group mb-0">
-                           				 <input type="number" id="pokok_lelang" class="form-control" placeholder="Pokok Lelang" readonly="">
-									</div>
-									<div class="form-group">
-                      							      <input type="text" id="jumlah" class="form-control" placeholder="Bea Lelang Penjual">
-                       							 </div>
-													<div class="form-group">
-                      							      <input type="text" id="jumlah" class="form-control" placeholder="PPh Final">
-                       							 </div>
-                        						<div class="form-group mb-0">
-                           				 <input type="text" id="" class="form-control" placeholder="" readonly="">
-									</div>
-															
-						
-     										 </div>
-										</div>
 											</div>
 										</div>
 										<h5>Data Transaksi</h5>
@@ -92,29 +59,21 @@
 										<div class="form-row">
 											<div class="form-group col-3">
 												<label for=uraian>Uraian</label>
-												<select name="uraian" id="idcsv" class="form-control">
-													<option value="">Pilih Transaksi Bank</option>
-													<?php foreach ($all_bank as $bank) : ?>
-														<option value="<?= $bank->uraian ?>"><?= $bank->uraian ?></option>
+												<select name="uraian" id="id_master" class="form-control">
+													<option value="">Pilih Transaksi Penerimaan</option>
+													<?php foreach ($all_master_transaksi as $master) : ?>
+														<option value="<?= $master->uraian ?>"><?= $master->uraian ?></option>
 													<?php endforeach ?>
 												</select>
 											</div>
 											
 											<div class="form-group col-2">
-												<label>Tanggal</label>
-												<input type="text" name="tanggal" value="" readonly class="form-control">
-											</div>
-											<div class="form-group col-2">
-												<label>Nama</label>
-												<input type="text" name="nama" value="" readonly class="form-control">
-											</div>
-											<div class="form-group col-2">
-												<label>Virtual Account</label>
-												<input type="number" name="virtual_account" value="" class="form-control" readonly>
+												<label>Tgl Nota Penerimaan</label>
+												<input type="text" name="tanggal_nota" value="" readonly class="form-control">
 											</div>
 											<div class="form-group col-2">
 												<label>Nominal</label>
-												<input type="number" name="nominal" value="" class="form-control" readonly>
+												<input type="number" name="nominal" value="" data-a-sign="Rp. " data-a-dec="," data-a-sep="." class="form-control" readonly>
 											</div>
 											<div class="form-group col-1">
 												<label for="">&nbsp;</label>
@@ -122,27 +81,30 @@
 											</div>
 											<input type="hidden" name="transaksi" value="">
 										</div>
+										<div class="form-row">
 										<div class="form-group col-1">
-												<label>idcsv</label>
-												<input type="number" name="idcsv" value="" class="form-control" readonly min='1'>
+												<label>id_master</label>
+												<input type="number"  name="id_master" value="" class="form-control" readonly>
+													</div>
+										<div class="form-group col-3">
+												<label>Jenis Penerimaan</label>
+												<input type="text"  name="nama_jenis" value="" class="form-control" readonly>
 											</div>
-											<div class="form-group col-1">
-												<label>Jumlah</label>
-												<input type="number" name="jumlah" value="" class="form-control" readonly min='1'>
+										<div class="form-group col-3">
+												<label>Rekening Tujuan</label>
+												<input type="text"  name="rek_tujuan" value="" class="form-control" >
+											</div>
 											</div>
 										<div class="keranjang">
-											<h5>Detail Nota Penerimaan</h5>
+											<h5>Detail Nota Pengeluaran</h5>
 											<hr>
 											<table class="table table-bordered" id="keranjang">
 												<thead>
 													<tr>
 														<td width="10%">Uraian</td>
-														<td width="10%">IdCSV</td>
-														<td width="15%">Tanggal</td>
-														<td width="15%">Nama</td>
-														<td width="10%">Nominal</td>
-														<td width="10%">Virtual Account</td>
-														<td width="10%">Jumlah</td>
+														<td width="15%">Tanggal_Nota</td>
+														
+
 														<td width="15%">Aksi</td>
 													</tr>
 												</thead>
@@ -176,6 +138,8 @@
 <script src="<?= base_url('sb-admin') ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url('sb-admin') ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="<?= base_url('sb-admin') ?>/js/sb-admin-2.min.js"></script>
+<script src="<?= base_url('sb-admin') ?>/js/autoNumeric.js"></script>
+
 	<script>
 		$(document).ready(function() {
 			$('tfoot').hide()
@@ -186,13 +150,13 @@
 				}
 			})
 
-			$('#idcsv').on('change', function() {
+			$('#id_master').on('change', function() {
 
 			if ($(this).val() == '') reset()
 				else {
-					const url_get_all_bank = $('#content').data('url') + '/get_all_bank'
+					const url_get_all_master_transaksi = $('#content').data('url') + '/get_all_master_transaksi'
 					$.ajax({
-						url: url_get_all_bank,
+						url: url_get_all_master_transaksi,
 						type: 'POST',
 						dataType: 'json',
 						data: {
@@ -200,16 +164,14 @@
 						},
 						success: function(data) {
 							$('input[name="uraian"]').val(data.uraian)
-							$('input[name="tanggal"]').val(data.tanggal)
-							$('input[name="nama"]').val(data.nama)
-							$('input[name="virtual_account"]').val(data.virtual_account)
+							$('input[name="tanggal_nota"]').val(data.tanggal_nota)
+							$('input[name="id_master"]').val(data.id_master)
 							$('input[name="nominal"]').val(data.nominal)
-							$('input[name="idcsv"]').val(data.idcsv)
-							$('input[name="max_hidden"]').val(data.stok)
-							$('input[name="jumlah"]').val(1)
+							$('input[name="nama_jenis"]').val(data.nama_jenis)
+
 							$('button#tambah').prop('disabled', false)
 
-							
+						
 							$('input[name="nominal"]').on('keydown keyup change blur', function() {
 								$('input[name="jumlah"]').val($('input[name="nominal"]').val() * $('input[name="uraian"]').val())
 												})
@@ -219,11 +181,11 @@
 			})
 
 			$(document).on('click', '#tambah', function(e) {
-				const url_keranjang_bank = $('#content').data('url') + '/keranjang_bank'
+				const url_keranjang_transaksi = $('#content').data('url') + '/keranjang_transaksi'
 				const data_keranjang = {
 					uraian: $('select[name="uraian"]').val(),
-					idcsv: $('input[name="idcsv"]').val(),
-					tanggal: $('input[name="tanggal"]').val(),
+					tanggal_nota: $('input[name="tanggal_nota"]').val(),
+					nama_jenis: $('input[name="nama_jenis"]').val(),
 					nama: $('input[name="nama"]').val(),
 					nominal: $('input[name="nominal"]').val(),
 					virtual_account: $('input[name="virtual_account"]').val(),
@@ -235,7 +197,7 @@
 					alert('data tidak tersedia! stok tersedia : ' + parseInt($('input[name="max_hidden"]').val()))
 				} else {
 					$.ajax({
-						url: url_keranjang_bank,
+						url: url_keranjang_transaksi,
 						type: 'POST',
 						data: data_keranjang,
 						success: function(data) {
@@ -290,21 +252,6 @@
 				$('button#tambah').prop('disabled', true)
 			}
 		})
-
-    $(document).ready(function() {
-        $("#hasil_bersih, #bea_penjual, #pph_final").keyup(function() {
-            var hasil_bersih  = $("#hasil_bersih").val();
-			console.log(hasil_bersih.toLocaleString());
-            var bea_penjual = $("#bea_penjual").val();
-			var pph_final = $("#pph_final").val();
-
-            var pokok_lelang = parseInt(hasil_bersih) + parseInt(bea_penjual) + parseInt(pph_final);
-            $("#pokok_lelang").val(pokok_lelang);
-        });
-
-    
-    });
-
 	</script>
 </body>
 

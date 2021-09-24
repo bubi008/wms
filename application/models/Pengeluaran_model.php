@@ -1,8 +1,8 @@
 <?php
 
-class Penerimaan_model extends CI_Model 
+class Pengeluaran_model extends CI_Model 
 {
-	protected $_table = 'nota_penerimaan';
+	protected $_table = 'nota_pengeluaran';
 
 	public function view(){
 		return $this->db->get($this->_table)->result();
@@ -13,7 +13,7 @@ class Penerimaan_model extends CI_Model
 		return $query->num_rows();
 	}
 
-	public function lihat_no_nota_penerimaan($nomor){
+	public function lihat_no_nota_pengeluaran($nomor){
 		return $this->db->get_where($this->_table, ['nomor' => $nomor])->row();
 	}
 
@@ -23,13 +23,12 @@ class Penerimaan_model extends CI_Model
 
 	public function hapus($nomor){
 		$this->db->trans_start();
-		$this->db->delete('nota_penerimaan', array('nomor' => $nomor));
-		$this->db->delete('master_transaksi', array('nota_penerimaan_id' => $nomor));
+		$this->db->delete('nota_pengeluaran', array('nomor' => $nomor));
 		$this->db->trans_complete();
 }
 public function getById($id) {
 
-	return $this->db->get_where($this->_table, ["id_np"=> $id])->row();
+	return $this->db->get_where($this->_table, ["id"=> $id])->row();
 	}
 
 public function update($data, $id){
@@ -51,4 +50,9 @@ public function getAll(){
 		$this->db->where('id_np', $id_np);
 		$this->db->update('nota_penerimaan', $data); // Untuk mengeksekusi perintah update data
 	  }
+
+	  
+ 
+
+    
 	}

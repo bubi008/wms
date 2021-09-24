@@ -8,10 +8,12 @@ class Pengesahan extends CI_Controller
 	{
 		parent::__construct();
 	
-		$this->load->model('Bank_model', 'bank_m');
+		$this->load->model('Pengesahan_model');
 		$this->load->model('Penerimaan_model', 'penerimaan_m');
-		$this->load->model('Master_transaksi_model', 'master_transaksi_m');
 		$this->load->model('Jenis_model', 'jenis_m');
+		$this->load->model('Master_transaksi_model', 'master_transaksi_m');
+	
+		
 		$this->data['aktif'] = 'nota_penerimaan';
 	}
 
@@ -48,10 +50,8 @@ class Pengesahan extends CI_Controller
 		$jumlah_bank_dinotakan = count($this->input->post('idcsv_hidden'));
 
 		$data_nota_penerimaan = [
-			'nomor' => $this->input->post('nomor'),
-			'tanggal_nota' => $this->input->post('tanggal_nota'),
-			'jenis_nota' => $this->input->post('nama_jenis'),
-			'nominal' => $this->input->post('total_hidden'),
+			'tanggal_pengesahan' => $this->input->post('tanggal_pengesahan'),
+	
 		];
 
 		$data_master_transaksi = [];
@@ -105,21 +105,6 @@ class Pengesahan extends CI_Controller
 	}
 
 
-	public function get_all_bank()
-	{
-		$data = $this->bank_m->lihat_uraian($_POST['uraian']);
-		echo json_encode($data);
-	}
-	public function get_all_jenis()
-	{
-		$data = $this->jenis_m->lihat_jenis($_POST['nama_jenis']);
-		echo json_encode($data);
-	}
-	public function keranjang_bank()
-	{
-		$this->load->view('penerimaan/keranjang');
-	}
-
 	public function export()
 	{
 		$dompdf = new Dompdf();
@@ -150,11 +135,92 @@ class Pengesahan extends CI_Controller
 		
 	}
 
-	public function otorisasi($nomor){
+	public function ubah($id_np){
 
-	$this->db->set('tanggal_pengesahan', FALSE);
-	$this->db->where('tanggal_pengesahan', 'today');
-	$this->db->update('nota_penerimaan');
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+	
+		if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
+		  if($this->penerimaan_model-->validation("update")){ // Jika validasi sukses atau hasil validasi adalah TRUE
+			$this->penerimaan_model-->edit($id_np); // Panggil fungsi edit() yang ada di Bank_model.php
+			redirect('pengesahan');
+		  }
+		}
+		
+		$data['pengesahan'] = $this->Penerimaan_model->view_by($id_np);
+		$this->load->view('pengesahan/ubah', $data);
+	
+		$this->load->view('template/footer');
+
+	}
+	public function edit($id){
+        $data = array();
+        
+        // Get member data
+        $memData = $this->nota_penerimaan->getRows(array('id_np' => $id));
+        
+        // If update request is submitted
+        if($this->input->post('memSubmit')){
+            // Form field validation rules
+            $this->form_validation->set_rules('id_np', 'id_np', 'required');
+            $this->form_validation->set_rules('nomor', 'nomor', 'required');
+            $this->form_validation->set_rules('jenis_nota', 'jenis_nota', 'required');
+            $this->form_validation->set_rules('tanggal_nota', 'tanggal_nota', 'required');
+			$this->form_validation->set_rules('nominal', 'nominal', 'required');
+			$this->form_validation->set_rules('nota_pengeluaran_id', 'nota_pengeluaran_id');
+            $this->form_validation->set_rules('tanggal_pengesahan', 'tanggal_pengesahan', 'required');
+			$this->form_validation->set_rules('pejabat', 'pejabat');
+			$this->form_validation->set_rules('kode_lelang', 'kode_lelang');
+
+            
+            // Prepare member data
+            $memData = array(
+                'id_np'=> $this->input->post('id_np'),
+                'nomor' => $this->input->post('nomor'),
+                'jenis_nota'     => $this->input->post('jenis_nota'),
+                'tanggal_nota'    => $this->input->post('tanggal_nota'),
+				'nominal'    => $this->input->post('nominal'),
+				'nota_pengeluaran_id'    => $this->input->post('nota_pengeluaran_id'),
+                'tanggal_pengesahan'   => $this->input->post('tanggal_pengesahan'),
+				'pejabat'    => $this->input->post('pejabat'),
+				'kode_lelang'    => $this->input->post('kode_lelang'),
+
+
+            );
+            
+            // Validate submitted form data
+            if($this->form_validation->run() == true){
+                // Update member data
+                $update = $this->nota_penerimaan->update($memData, $id_np);
+
+                if($update){
+                    $this->session->set_userdata('success_msg', 'Member has been updated successfully.');
+                    redirect('pengesahan');
+                }else{
+                    $data['error_msg'] = 'Some problems occured, please try again.';
+                }
+            }
+        }
+
+        $data['nota_penerimaan'] = $memData;
+        $data['title'] = 'Update Member';
+        
+        // Load the edit page view
+        $this->load->view('templates/header', $data);
+        $this->load->view('pengesahan/edit', $data);
+        $this->load->view('templates/footer');
+    }
+
+	public function update() {
+		$this->form_validation->set_rules('tanggal_pengesahan', 'tanggal_pengesahan');
+		if ($this->form_validation->run()==true)
+		{
+			$id_np = $this->input->post('id_np');
+			$data['tanggal_pengesahan'] = $this->input->post('tanggal_pengesahan');
+			$this->pengesahan_m->update($data,$id_np);
+
+		}
+	
 
 
 	}

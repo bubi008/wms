@@ -81,7 +81,7 @@ class Import extends CI_Controller {
                             // Check whether email already exists in the database
                             $con = array(
                                 'where' => array(
-                                    'virtual_account' => $row['virtual_account']
+                                    'uraian' => $row['uraian']
                                 ),
                                 'returnType' => 'count'
                             );
@@ -89,7 +89,7 @@ class Import extends CI_Controller {
                             
                             if($prevCount > 0){
                                 // Update member data
-                                $condition = array('virtual_account' => $row['virtual_account']);
+                                $condition = array('uraian' => $row['uraian']);
                                 $update = $this->Import_model->update($memData, $condition);
                                 
                                 if($update){

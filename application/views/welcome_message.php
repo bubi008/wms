@@ -18,6 +18,7 @@
 			<div class="col-md-6 p-lg-5 mx-auto my-5">
 				<img src="<?= base_url(); ?>assets/img/rcs_welcome_logo.png" alt="User Image" width="100%">
 				<p class="font-weight-light mt-3">Dengan kolaborasi hebat bersama Anda, Penatausahaan Hasil Pengurusan Piutang Negara dan Lelang menjadi lebih ringkas.</p>
+				
 				<a class="btn btn-outline-success mb-3" href="<?= base_url('beranda'); ?>">Masuk Aplikasi</a>
 			</div>
 		</div>

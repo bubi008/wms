@@ -16,6 +16,7 @@ class Beranda extends CI_Controller
 		$this->load->view('template/sidebar');
 		
 		$this->load->model('Beranda_model');
+		$this->db->having('stok=2');
         $this->data['total_bank'] = $this->Beranda_model->total_rows();
 
 		$this->data['total_nota_penerimaan'] = $this->Beranda_penerimaan_model->total_nota_penerimaan();
