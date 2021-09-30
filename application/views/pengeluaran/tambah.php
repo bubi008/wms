@@ -44,7 +44,7 @@
 											</div>
 											<div class="form-group col-2">
 												<label>Jenis</label>
-												<label for="nama_jenis"></label>
+												<label for="jenis_pengeluaran"></label>
 												<select name="nama_jenis" id="nama_jenis" class="form-control">
 													<option value="">Jenis</option>
 													<?php foreach ($all_jenis as $jenis) : ?>
@@ -61,12 +61,15 @@
 												<label for=uraian>Uraian</label>
 												<select name="uraian" id="id_master" class="form-control">
 													<option value="">Pilih Transaksi Penerimaan</option>
-													<?php foreach ($all_master_transaksi as $master) : ?>
+													<?php foreach ($all_master_penerimaan as $master) : ?>
 														<option value="<?= $master->uraian ?>"><?= $master->uraian ?></option>
 													<?php endforeach ?>
 												</select>
 											</div>
-											
+											<div class="form-group col-2">
+												<label>Id Master Penerimaan</label>
+												<input type="text" name="id_master" value="" readonly class="form-control">
+											</div>
 											<div class="form-group col-2">
 												<label>Tgl Nota Penerimaan</label>
 												<input type="text" name="tanggal_nota" value="" readonly class="form-control">
@@ -83,16 +86,21 @@
 										</div>
 										<div class="form-row">
 										<div class="form-group col-1">
-												<label>id_master</label>
-												<input type="number"  name="id_master" value="" class="form-control" readonly>
+												<label>Nomor NP</label>
+												<input type="text"  name="nota_penerimaan_id" value="" class="form-control" readonly>
 													</div>
 										<div class="form-group col-3">
 												<label>Jenis Penerimaan</label>
-												<input type="text"  name="nama_jenis" value="" class="form-control" readonly>
+												<input type="text"  name="jenis_penerimaan" value="" class="form-control" readonly>
 											</div>
 										<div class="form-group col-3">
 												<label>Rekening Tujuan</label>
 												<input type="text"  name="rek_tujuan" value="" class="form-control" >
+												</div>
+										<div class="form-group col-1">
+												<label>Jumlah</label>
+												<input type="text"  name="jumlah_pengeluaran" value="" class="form-control" readonly>
+
 											</div>
 											</div>
 										<div class="keranjang">
@@ -101,9 +109,12 @@
 											<table class="table table-bordered" id="keranjang">
 												<thead>
 													<tr>
-														<td width="10%">Uraian</td>
-														<td width="15%">Tanggal_Nota</td>
-														
+													<td width="10%">Uraian</td>	
+													<td width="15%">Tanggal_Nota</td>
+													<td width="10%">Nomor Nota Penerimaan</td>
+													<td width="10%">Jenis Nota Penerimaan</td>
+													<td width="15%">Nominal</td>
+													<td width="10%">Rekening Tujuan</td>
 
 														<td width="15%">Aksi</td>
 													</tr>
@@ -154,9 +165,9 @@
 
 			if ($(this).val() == '') reset()
 				else {
-					const url_get_all_master_transaksi = $('#content').data('url') + '/get_all_master_transaksi'
+					const url_get_all_master_penerimaan = $('#content').data('url') + '/get_all_master_penerimaan'
 					$.ajax({
-						url: url_get_all_master_transaksi,
+						url: url_get_all_master_penerimaan,
 						type: 'POST',
 						dataType: 'json',
 						data: {
@@ -164,16 +175,21 @@
 						},
 						success: function(data) {
 							$('input[name="uraian"]').val(data.uraian)
-							$('input[name="tanggal_nota"]').val(data.tanggal_nota)
 							$('input[name="id_master"]').val(data.id_master)
+							$('input[name="tanggal_nota"]').val(data.tanggal_nota)
+							$('input[name="nota_penerimaan_id"]').val(data.nota_penerimaan_id)
 							$('input[name="nominal"]').val(data.nominal)
-							$('input[name="nama_jenis"]').val(data.nama_jenis)
+							$('input[name="jenis_penerimaan"]').val(data.jenis_penerimaan)
+							$('input[name="jumlah_pengeluaran"]').val(1)
+							$('input[name="max_hidden"]').val(data.jumlah_transaksi)
+
+
 
 							$('button#tambah').prop('disabled', false)
 
 						
 							$('input[name="nominal"]').on('keydown keyup change blur', function() {
-								$('input[name="jumlah"]').val($('input[name="nominal"]').val() * $('input[name="uraian"]').val())
+								$('input[name="jumlah_pengeluaran"]').val($('input[name="nominal"]').val() * $('input[name="uraian"]').val())
 												})
 											}
 					})
@@ -184,12 +200,13 @@
 				const url_keranjang_transaksi = $('#content').data('url') + '/keranjang_transaksi'
 				const data_keranjang = {
 					uraian: $('select[name="uraian"]').val(),
+					id_master: $('input[name="id_master"]').val(),
 					tanggal_nota: $('input[name="tanggal_nota"]').val(),
-					nama_jenis: $('input[name="nama_jenis"]').val(),
-					nama: $('input[name="nama"]').val(),
+					jenis_penerimaan: $('input[name="jenis_penerimaan"]').val(),
+					nota_penerimaan_id: $('input[name="nota_penerimaan_id"]').val(),
 					nominal: $('input[name="nominal"]').val(),
-					virtual_account: $('input[name="virtual_account"]').val(),
-					jumlah: $('input[name="jumlah"]').val(),
+					jumlah_pengeluaran: $('input[name="jumlah_pengeluaran"]').val(),
+					rek_tujuan: $('input[name="rek_tujuan"]').val(),
 
 				}
 
@@ -226,11 +243,12 @@
 
 			$('button[type="submit"]').on('click', function() {
 				$('input[name="uraian"]').prop('disabled', true)
-				$('select[name="tanggal"]').prop('disabled', true)
-				$('input[name="nama]').prop('disabled', true)
+				$('select[name="tanggal_nota"]').prop('disabled', true)
+				$('input[name="nota_penerimaan_id]').prop('disabled', true)
+				$('input[name="jenis_penerimaan]').prop('disabled', true)
 				$('input[name="virtual_account"]').prop('disabled', true)
 				$('input[name="nominal"]').prop('disabled', true)
-				$('input[name="jumlah"]').prop('disabled', true)
+				$('input[name="jumlah_pengeluaran"]').prop('disabled', true)
 			})
 
 			function hitung_total() {
@@ -244,8 +262,8 @@
 
 			function reset() {
 				$('#uraian').val('')
-				$('input[name="tanggal"]').val('')
-				$('input[name="nama"]').val('')
+				$('input[name="tanggal_nota"]').val('')
+				$('input[name="jenis_penerimaan"]').val('')
 				$('input[name="virtual_account"]').val('')
 				$('input[name="nominal"]').val('')
 				$('input[name="jumlah"]').prop('readonly', true)

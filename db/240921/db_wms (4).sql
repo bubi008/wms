@@ -3615,10 +3615,10 @@ CREATE TABLE `master_pengeluaran` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_transaksi`
+-- Table structure for table `master_penerimaan`
 --
 
-CREATE TABLE `master_transaksi` (
+CREATE TABLE `master_penerimaan` (
   `id_master` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `bank_idcsv` int(11) NOT NULL,
@@ -3643,10 +3643,10 @@ CREATE TABLE `master_transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `master_transaksi`
+-- Dumping data for table `master_penerimaan`
 --
 
-INSERT INTO `master_transaksi` (`id_master`, `nama`, `bank_idcsv`, `nota_penerimaan_id`, `tanggal_nota`, `rekening_id`, `jenis_rekening_id`, `jenis_id`, `pejabat_id`, `e-lelang_id`, `focus_pn_id`, `kelompok_id`, `subjenis_id`, `jumlah_transaksi`, `nominal`, `nota_pengeluaran_id`, `tanggal_nota_pengeluaran`, `uraian`, `tanggal_idcsv`, `nama_jenis`, `kode_lelang`) VALUES
+INSERT INTO `master_penerimaan` (`id_master`, `nama`, `bank_idcsv`, `nota_penerimaan_id`, `tanggal_nota`, `rekening_id`, `jenis_rekening_id`, `jenis_id`, `pejabat_id`, `e-lelang_id`, `focus_pn_id`, `kelompok_id`, `subjenis_id`, `jumlah_transaksi`, `nominal`, `nota_pengeluaran_id`, `tanggal_nota_pengeluaran`, `uraian`, `tanggal_idcsv`, `nama_jenis`, `kode_lelang`) VALUES
 (27, '', 430, 4374, '2021-09-21', 0, 0, 0, 0, 0, 0, 0, 0, '1', '8000000', 0, NULL, 'TRANSFER DARI | PEMINDAHAN DARI 683422469 Bpk UMAR  FARUK | 9880050720114089 Umar faruk TKR0Z7', '2020-11-30', 'Uang Jaminan Lelang', NULL),
 (28, '', 431, 4374, '2021-09-21', 0, 0, 0, 0, 0, 0, 0, 0, '1', '750000', 0, NULL, 'TRANSFER DARI | PEMINDAHAN DARI 757350385 Bpk   DHANIEL | 9880050720114093 dhaniel ZMQTBB', '2020-11-30', 'Uang Jaminan Lelang', NULL),
 (29, '', 432, 4374, '2021-09-21', 0, 0, 0, 0, 0, 0, 0, 0, '1', '28515420', 0, NULL, 'TRANSFER DARI | PEMINDAHAN DARI 390251505 Bpk RICKY  MARKUS | 9880050720113876 Ricky Markus RTKOVI', '2020-11-30', 'Uang Jaminan Lelang', NULL),
@@ -4048,9 +4048,9 @@ ALTER TABLE `master_pengeluaran`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `master_transaksi`
+-- Indexes for table `master_penerimaan`
 --
-ALTER TABLE `master_transaksi`
+ALTER TABLE `master_penerimaan`
   ADD PRIMARY KEY (`id_master`,`bank_idcsv`,`nota_penerimaan_id`,`rekening_id`,`jenis_rekening_id`,`jenis_id`,`pejabat_id`,`e-lelang_id`,`focus_pn_id`,`kelompok_id`,`subjenis_id`,`nota_pengeluaran_id`) USING BTREE,
   ADD KEY `nota_penerimaan_id` (`nota_penerimaan_id`),
   ADD KEY `pejabat_id` (`pejabat_id`),
@@ -4178,9 +4178,9 @@ ALTER TABLE `master_pengeluaran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `master_transaksi`
+-- AUTO_INCREMENT for table `master_penerimaan`
 --
-ALTER TABLE `master_transaksi`
+ALTER TABLE `master_penerimaan`
   MODIFY `id_master` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --

@@ -7,25 +7,33 @@
 		<?= $this->input->post('tanggal_nota') ?>
 		<input type="hidden" name="tanggal_nota_hidden[]" value="<?= $this->input->post('tanggal_nota') ?>">
 	</td>
-	<td class="nama_jenis">
-		<?= $this->input->post('nama_jenis') ?>
-		<input type="hidden" name="nama_jenis_hidden[]" value="<?= $this->input->post('nama_jenis') ?>">
+	<td class="nota_penerimaan_id">
+		<?= $this->input->post('nota_penerimaan_id') ?>
+		<input type="hidden" name="nota_penerimaan_id_hidden[]" value="<?= $this->input->post('nota_penerimaan_id') ?>">
 	</td>
-	<td class="nama">
-		<?= $this->input->post('nama') ?>
-		<input type="hidden" name="nama_hidden[]" value="<?= $this->input->post('nama') ?>">
+	<td class="jenis_penerimaan">
+		<?= $this->input->post('jenis_penerimaan') ?>
+		<input type="hidden" name="jenis_penerimaan_hidden[]" value="<?= $this->input->post('jenis_penerimaan') ?>">
         </td>
 		<td class="nominal">
 		<?= strtoupper($this->input->post('nominal')) ?>
 		<input type="hidden" name="nominal_hidden[]" value="<?= $this->input->post('nominal') ?>">
 	</td>
-	<td class="virtual_account">
-		<?= $this->input->post('virtual_account') ?>
-		<input type="hidden" name="virtual_account_hidden[]" value="<?= $this->input->post('virtual_account') ?>">
+	<td class="rek_tujuan">
+		<?= $this->input->post('rek_tujuan') ?>
+		<input type="hidden" name="rek_tujuan_hidden[]" value="<?= $this->input->post('rek_tujuan') ?>">
+		</td>
+	<td class="id_master">
+		<?= $this->input->post('id_master') ?>
+		<input type="hidden" name="id_master_hidden[]" value="<?= $this->input->post('id_master') ?>">
 	</td>
-	<td class="jumlah">
-		<?= $this->input->post('jumlah') ?>
-		<input type="hidden" name="jumlah_hidden[]" value="<?= $this->input->post('jumlah') ?>">
+	<td class="jumlah_transaksi">
+		<?= $this->input->post('jumlah_transaksi') ?>
+		<input type="hidden" name="jumlah_transaksi_hidden[]" value="<?= $this->input->post('jumlah_transaksi') ?>">
+		</td>
+	<td class="jumlah_pengeluaran">
+		<?= $this->input->post('jumlah_pengeluaran') ?>
+		<input type="hidden" name="jumlah_pengeluaran_hidden[]" value="<?= $this->input->post('jumlah_pengeluaran') ?>">
 	</td>
 	<td class="aksi">
 		<button type="button" class="btn btn-danger btn-sm" id="tombol-hapus" data-uraian="<?= $this->input->post('uraian') ?>"><i class="fa fa-trash"></i></button>

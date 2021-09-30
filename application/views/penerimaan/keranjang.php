@@ -30,4 +30,6 @@
 	<td class="aksi">
 		<button type="button" class="btn btn-danger btn-sm" id="tombol-hapus" data-uraian="<?= $this->input->post('uraian') ?>"><i class="fa fa-trash"></i></button>
 	</td>
+	<td class="aksi">
+		<button type="button" class="btn btn-primary btn-sm" id="tombol-tambah" data-uraian="<?= $this->input->post('uraian') ?>"><i class="fa fa-plus"> RPUHL</i></button>
 </tr>

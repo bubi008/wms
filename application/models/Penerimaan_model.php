@@ -24,7 +24,7 @@ class Penerimaan_model extends CI_Model
 	public function hapus($nomor){
 		$this->db->trans_start();
 		$this->db->delete('nota_penerimaan', array('nomor' => $nomor));
-		$this->db->delete('master_transaksi', array('nota_penerimaan_id' => $nomor));
+		$this->db->delete('master_penerimaan', array('nota_penerimaan_id' => $nomor));
 		$this->db->trans_complete();
 }
 public function getById($id) {

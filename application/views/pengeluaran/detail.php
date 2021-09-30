@@ -10,7 +10,7 @@
 		
 
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('penerimaan') ?>">
+			<div id="content" data-url="<?= base_url('pengeluaran') ?>">
 				<!-- load Topbar -->
 				
 
@@ -20,8 +20,8 @@
 						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 					</div>
 					<div class="float-right">
-						<a href="<?= base_url('penerimaan/export_detail/' . $penerimaan->nomor) ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
-						<a href="<?= base_url('penerimaan') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
+						<a href="<?= base_url('pengeluaran/export_detail/' . $pengeluaran->nomor) ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
+						<a href="<?= base_url('pengeluaran') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
 					</div>
 				</div>
 				<hr>
@@ -41,25 +41,25 @@
 					</div>
 				<?php endif ?>
 				<div class="card shadow">
-					<div class="card-header"><strong>Nota Penerimaan - <?= $penerimaan->nomor ?></strong></div>
+					<div class="card-header"><strong>Nota Pengeluaran - <?= $pengeluaran->nomor ?></strong></div>
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-6">
 								<table class="table table-borderless">
 									<tr>
-										<td><strong>Nomor Nota Penerimaan</strong></td>
+										<td><strong>Nomor Nota Pengeluaran</strong></td>
 										<td>:</td>
-										<td><?= $penerimaan->nomor ?></td>
+										<td><?= $pengeluaran->nomor ?></td>
 									</tr>
 									<tr>
 										<td><strong>Tanggal Nota</strong></td>
 										<td>:</td>
-										<td><?= $penerimaan->tanggal_nota ?> </td>
+										<td><?= $pengeluaran->tanggal ?> </td>
 									</tr>
 									<tr>
 										<td><strong>Jenis</strong></td>
 										<td>:</td>
-										<td><?= $penerimaan->jenis_nota ?> </td>
+										<td><?= $pengeluaran->jenis_pengeluaran ?> </td>
 									</tr>
 								</table>
 							</div>
@@ -71,22 +71,22 @@
 									<thead>
 										<tr>
 											<td><strong>No</strong></td>
-											<td><strong>Idcsv</strong></td>
-											<td><strong>Tanggal Rekening</strong></td>
+											<td><strong>Nomor Nota Penerimaan</strong></td>
+											<td><strong>Tanggal Nota Penerimaan</strong></td>
 											<td><strong>Uraian</strong></td>
 											<td><strong>Nominal</strong></td>
-											<td><strong>Aksi</strong></td>
+											<td><strong>Rekening Tujuan</strong></td>
 										</tr>
 									</thead>
 									<tbody>
-										<?php foreach ($all_detail_penerimaan as $detail_penerimaan): ?>
+										<?php foreach ($all_detail_pengeluaran as $detail_pengeluaran): ?>
 											<tr>
 												<td><?= $no++ ?></td>
-												<td><?= $detail_penerimaan->bank_idcsv ?></td>
-												<td><?= $detail_penerimaan->tanggal_idcsv ?></td>
-												<td><?= $detail_penerimaan->uraian ?></td>
-												<td>Rp<?= number_format($detail_penerimaan->nominal, 0, ',', '.') ?></td>
-												<td><a href="<?= base_url('penerimaan/tambah_rphl') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;RPUHL</a></td>
+												<td><?= $detail_pengeluaran->nota_penerimaan_id ?></td>
+												<td><?= $detail_pengeluaran->tanggal_penerimaan ?></td>
+												<td><?= $detail_pengeluaran->uraian ?></td>
+												<td>Rp<?= number_format($detail_pengeluaran->nominal_pengeluaran, 0, ',', '.') ?></td>
+												<td><?= $detail_pengeluaran->rekening_tujuan ?></td>
 
 											</tr>
 										<?php endforeach ?>
@@ -94,7 +94,7 @@
 									<tfoot>
 										<tr>
 											<td colspan="4" align="right"><strong>Total : </strong></td>
-											<td>Rp<?= number_format($penerimaan->nominal, 0, ',', '.') ?></td>
+											<td>Rp<?= number_format($pengeluaran->nominal, 0, ',', '.') ?></td>
 										</tr>
 									</tfoot>
 								</table>

@@ -62,7 +62,7 @@
 											</div>
 											<style>
     											.box{
-       												 color: #01010A;
+       												 color: #fff;
         											padding: 10px;
        												 display: none;
        													 margin-top: 10px;
@@ -75,21 +75,32 @@
 												  <label>Rincian Penerimaan Uang Hasil Lelang</label>
    												 <div class="card">
       											<div class="card-body">
-												
-												  <div class="form-row">
-                                               <form action="penerimaan/insert_batch" method="post">
-											   <div class="form-group">
-                                        <input class="col-sm-5" type="text" name="nama_jenis_" class="form-control" value="Hasil Bersih Lelang" >          
-                                        <input class="col-sm-5" type="number" name="nominal" class="form-control" value="">
-                                        <input class="col-sm-5" type="text" name="nama_jenis_" class="form-control" value="Bea lelang Penjual" >          
-                                        <input class="col-sm-5" type="number" name="nominal" class="form-control" >
-</div>										
-								</div>
-								<a href="<?php echo site_url('penerimaan/insert_batch/'); ?>" class="btn btn-primary btn-sm">RPUHL</a>
+												  <form action="lelang_rphl/input_data" method="post">
 										
-
-
-									
+												<div class="form-group">
+                        	   					 <input type="number" id="virtual_account_rphl" value="" class="form-control" placeholder="virtual_account_rphl"name="virtual_account">
+                        						</div>
+												<div class="form-group">
+                        	   					 <input type="number" id="hasil_bersih" value="" class="form-control" placeholder="hasil_bersih"name="hasil_bersih">
+                        						</div>
+                       						 <div class="form-group">
+                      							      <input type="number" id="bea_penjual" class="form-control" placeholder="Bea Lelang Penjual" name="bea_lelang_penjual">
+                       							 </div>
+													<div class="form-group">
+                      							      <input type="number" id="pph_final" class="form-control" placeholder="PPh Final" name="pph_final">
+                       							 </div>
+                        						<div class="form-group mb-0">
+                           				 <input type="number" id="pokok_lelang" class="form-control" placeholder="Pokok Lelang" readonly="">
+									</div>
+									<div class="form-group">
+                      							      <input type="text" id="jumlah" class="form-control" placeholder="Bea Lelang Penjual">
+                       							 </div>
+													<div class="form-group">
+                      							      <input type="text" id="jumlah" class="form-control" placeholder="PPh Final">
+                       							 </div>
+                        						<div class="form-group mb-0">
+                           				 <input type="text" id="" class="form-control" placeholder="" readonly="">
+									</div>
 												</div>			
 						
      										 </div>
@@ -132,7 +143,7 @@
 											</div>
 											<div class="form-group col-1">
 												<label>Jumlah</label>
-												<input type="number" name="jumlah" value="" class="form-control" readonly min='1'>
+												<input type="number" name="jumlah" value="2" class="form-control" readonly min='2'>
 											</div>
 											<div class="form-group col-1">
 												<label for="">&nbsp;</label>
@@ -187,9 +198,6 @@
 <script src="<?= base_url('sb-admin') ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url('sb-admin') ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="<?= base_url('sb-admin') ?>/js/sb-admin-2.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 	<script>
 		$(document).ready(function() {
 			$('tfoot').hide()
@@ -221,7 +229,7 @@
 							$('input[name="idcsv"]').val(data.idcsv)
 							$('input[name="kode_lelang"]').val(data.kode_lelang)
 							$('input[name="max_hidden"]').val(data.stok)
-							$('input[name="jumlah"]').val(1)
+							$('input[name="jumlah"]').val(2)
 							$('button#tambah').prop('disabled', false)
 
 							
@@ -353,72 +361,6 @@ if ($(this).val() == '') reset()
 				}
 			})
     });
-	$(document).ready(function(){
- var count = 1;
- $('#add').click(function(){
-  count = count + 1;
-  var html_code = "<tr id='row"+count+"'>";
-   html_code += "<td contenteditable='true' class='item_name'></td>";
-   html_code += "<td contenteditable='true' class='item_code'></td>";
-   html_code += "<td contenteditable='true' class='item_desc'></td>";
-   html_code += "<td contenteditable='true' class='item_price' ></td>";
-   html_code += "<td><button type='button' name='remove' data-row='row"+count+"' class='btn btn-danger btn-xs remove'>-</button></td>";   
-   html_code += "</tr>";  
-   $('#crud_table').append(html_code);
- });
- 
- $(document).on('click', '.remove', function(){
-  var delete_row = $(this).data("row");
-  $('#' + delete_row).remove();
- });
- 
- $('#save').click(function(){
-  var item_name = [];
-  var item_code = [];
-  var item_desc = [];
-  var item_price = [];
-  $('.item_name').each(function(){
-   item_name.push($(this).text());
-  });
-  $('.item_code').each(function(){
-   item_code.push($(this).text());
-  });
-  $('.item_desc').each(function(){
-   item_desc.push($(this).text());
-  });
-  $('.item_price').each(function(){
-   item_price.push($(this).text());
-  });
-  $.ajax({
-   url:"insert.php",
-   method:"POST",
-   data:{item_name:item_name, item_code:item_code, item_desc:item_desc, item_price:item_price},
-   success:function(data){
-    alert(data);
-    $("td[contentEditable='true']").text("");
-    for(var i=2; i<= count; i++)
-    {
-     $('tr#'+i+'').remove();
-    }
-    fetch_item_data();
-   }
-  });
- });
- 
- function fetch_item_data()
- {
-  $.ajax({
-   url:"fetch.php",
-   method:"POST",
-   success:function(data)
-   {
-    $('#inserted_item_data').html(data);
-   }
-  })
- }
- fetch_item_data();
- 
-});
 
 	</script>
 </body>

@@ -11,17 +11,17 @@
     <?php } ?>
     
     <div class="row">
-        <div class="col-md-12 search-panel">
+        <div class="col-md-4 search-panel">
             <!-- Search form -->
             <form method="post">
-                <div class="input-group mb-3">
+                <div class="input-group mb-2">
                     <input type="text" name="searchKeyword" class="form-control" placeholder="Cari data transaksi..." value="<?php echo $searchKeyword; ?>">
                     <div class="input-group-append">
                         <input type="submit" name="submitSearch" class="btn btn-outline-secondary" value="Search">
                         <input type="submit" name="submitSearchReset" class="btn btn-outline-secondary" value="Reset">
                     </div>
                 </div>
-
+</div>
 <section class="content">
   <div class="container-fluid">
 

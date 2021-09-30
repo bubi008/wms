@@ -215,10 +215,10 @@ CREATE TABLE IF NOT EXISTS `kelompok` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_transaksi`
+-- Table structure for table `master_penerimaan`
 --
 
-CREATE TABLE IF NOT EXISTS `master_transaksi` (
+CREATE TABLE IF NOT EXISTS `master_penerimaan` (
   `id_master` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `bank_idcsv` int(11) NOT NULL,
@@ -251,10 +251,10 @@ CREATE TABLE IF NOT EXISTS `master_transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `master_transaksi`
+-- Dumping data for table `master_penerimaan`
 --
 
-INSERT INTO `master_transaksi` (`id_master`, `name`, `bank_idcsv`, `nota_penerimaan_id`, `rekening_id`, `jenis_rekening_id`, `jenis_id`, `pejabat_id`, `e-lelang_id`, `focus_pn_id`, `kelompok_id`, `subjenis_id`, `nota_pengeluaran_id`, `jumlah_transaksi`, `nominal`, `uraian`, `tanggal_idcsv`, `nama_jenis`) VALUES
+INSERT INTO `master_penerimaan` (`id_master`, `name`, `bank_idcsv`, `nota_penerimaan_id`, `rekening_id`, `jenis_rekening_id`, `jenis_id`, `pejabat_id`, `e-lelang_id`, `focus_pn_id`, `kelompok_id`, `subjenis_id`, `nota_pengeluaran_id`, `jumlah_transaksi`, `nominal`, `uraian`, `tanggal_idcsv`, `nama_jenis`) VALUES
 (0, '', 1, 3846, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '32000000', 'Lelang JWCY5N ', '2021-08-03', 'U'),
 (0, '', 5, 3846, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '843530', 'BRIVA2613420031662908IBNKjayadi YL8DU7  ', '2020-03-30', 'a'),
 (0, '', 6, 3846, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '6696840', 'BRIVA2613420030752608IBNKjayadi AYJXOM  ', '2020-03-30', 'g'),

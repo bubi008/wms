@@ -13,14 +13,16 @@ class Beranda extends CI_Controller
 	public function index()
 	{
 		$this->load->view('template/header');
+
+		
 		$this->load->view('template/sidebar');
 		
 		$this->load->model('Beranda_model');
-		$this->db->having('stok=2');
+		$this->db->having('stok=3');
         $this->data['total_bank'] = $this->Beranda_model->total_rows();
 
 		$this->data['total_nota_penerimaan'] = $this->Beranda_penerimaan_model->total_nota_penerimaan();
-
+		$this->data['total_nota_pengeluaran'] = $this->Beranda_penerimaan_model->total_nota_pengeluaran();
 
 		$this->load->view('beranda/index', $this->data);
 		$this->load->view('template/footer');

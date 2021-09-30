@@ -4,15 +4,15 @@ class Multi_insert extends CI_Controller{
    function __construct()
    {
       parent::__construct();   
-      $this->load->model('Multi_insert_model');
+      $this->load->model('Lelang_rphl_model');
    }
    public function index(){
 
     $this->load->view('template/header');
     $this->load->view('template/sidebar');
 
-      $data['master_transaksi'] = $this->Multi_insert_model->get_master_transaksi()->result();
-      $this->load->view('multi_insert/index',$data);
+      $data['e-lelang_rphl'] = $this->Lelang_rphl_model->get_lelang_rphl()->result();
+      $this->load->view('penerimaan/tambah',$data);
       $this->load->view('template/footer');
       
    }
@@ -24,6 +24,6 @@ class Multi_insert extends CI_Controller{
             'nominal' => $_POST['nominal'][$key]         
          );      
       }      
-      $this->db->insert_batch('master_transaksi',$result);
+      $this->db->insert_batch('master_penerimaan',$result);
    }
 }
