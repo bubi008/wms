@@ -18,7 +18,7 @@ class Lpj extends CI_Controller
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->data['title'] = 'Buku Kas Umum';
-		$data['master_transaksi']= $this->Lpj_m->view();
+		$data['query']= $this->Lpj_m->union_nota();
 		$this->load->view('lpj/index', $data);
 
 

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Bank_model extends CI_Model {
+class Master_pengeluaran_model extends CI_Model {
 
-  protected $_table = 'bank';
+  protected $_table = 'master_pengeluaran';
   
   // Fungsi untuk menampilkan semua data bank
    
@@ -24,8 +24,8 @@ class Bank_model extends CI_Model {
     if(array_key_exists("returnType",$params) && $params['returnType'] == 'count'){
         $result = $this->db->count_all_results();
     }else{
-        if(array_key_exists("idcsv", $params)){
-            $this->db->where('idcsv', $params['idcsv']);
+        if(array_key_exists("id", $params)){
+            $this->db->where('id', $params['id']);
             $query = $this->db->get();
             $result = $query->row_array();
         }else{
@@ -45,7 +45,7 @@ class Bank_model extends CI_Model {
     return $result;
 }
 public function view(){
-    return $this->db->get('bank')->result();
+    return $this->db->get('master_pengeluaran')->result();
     $data = array();
         
         // Check whether member id is not empty
@@ -67,7 +67,7 @@ public function view(){
   // Fungsi untuk menampilkan data berdasarkan idcsv nya
   public function view_by($idcsv){
     $this->db->where('idcsv', $idcsv);
-    $this->db->having('stok=3');
+    $this->db->having('stok=1');
     return $this->db->get('bank')->row();
   }
   
@@ -125,8 +125,8 @@ public function view(){
   }
   
   // Fungsi untuk melakukan menghapus data bank berdasarkan idcsv bank
-  public function delete($idcsv){
-    $this->db->where('idcsv', $idcsv);
+  public function delete($id_master){
+    $this->db->where('id_master', $id_master);
     $this->db->delete('bank'); // Untuk mengeksekusi perintah delete data
   }
 
@@ -136,7 +136,7 @@ public function view(){
   }
   
 	public function lihat_stok(){
-		$query = $this->db->get_where($this->_table, 'stok > 2');
+		$query = $this->db->get_where($this->_table, 'jumlah > 0');
 		return $query->result();
 
 	}
@@ -152,6 +152,12 @@ public function view(){
 		$query = $this->db->get($this->_table);
 		return $query->row();
  
+	}
+	public function tambah($data){
+		return $this->db->insert_batch($this->_table, $data);
 
+    }
+    public function lihat_no_nota_pengeluaran($nota_pengeluaran_id){
+      return $this->db->get_where($this->_table, ['nota_pengeluaran_id' => $nota_pengeluaran_id])->result();
     }
 }

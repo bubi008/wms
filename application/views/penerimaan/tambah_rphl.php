@@ -10,7 +10,7 @@
 	
 
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('pengeluaran') ?>">
+			<div id="content" data-url="<?= base_url('penerimaan') ?>">
 				<!-- load Topbar -->
 
 
@@ -20,14 +20,14 @@
 						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 					</div>
 					<div class="float-right">
-						<a href="<?= base_url('pengeluaran/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
-						<a href="<?= base_url('pengeluaran/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+						<a href="<?= base_url('penerimaan/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
+						<a href="<?= base_url('penerimaan/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
 					</div>
 				</div>
 				<hr>
 				
 				<div class="card shadow">
-					<div class="card-header"><strong>Daftar Pengeluaran</strong></div>
+					<div class="card-header"><strong>Daftar RPHL</strong></div>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
@@ -41,18 +41,16 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach ($all_pengeluaran as $pengeluaran): ?>
+									<?php foreach ($all_penerimaan as $penerimaan): ?>
 										<tr>
-											<td><?= $pengeluaran->nomor ?></td>
-											<td><?= $pengeluaran->tanggal ?></td>
-											<td><?= $pengeluaran->jenis_pengeluaran ?></td>
-											
-										
+											<td><?= $penerimaan->nomor ?></td>
+											<td><?= $penerimaan->tanggal_nota ?></td>
+											<td><?= $penerimaan->jenis_nota ?></td>
 
-											<td>Rp <?= number_format($pengeluaran->nominal, 0, ',', '.') ?></td>
+											<td>Rp <?= number_format($penerimaan->nominal, 0, ',', '.') ?></td>
 											<td>
-												<a href="<?= base_url('pengeluaran/detail/' . $pengeluaran->nomor) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-												<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('pengeluaran/hapus/' . $pengeluaran->nomor) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												<a href="<?= base_url('penerimaan/detail/' . $penerimaan->nomor) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+												<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('penerimaan/hapus/' . $penerimaan->nomor) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 											</td>
 										</tr>
 									<?php endforeach ?>

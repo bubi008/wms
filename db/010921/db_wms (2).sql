@@ -203,10 +203,10 @@ CREATE TABLE `kelompok` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_transaksi`
+-- Table structure for table `master_penerimaan`
 --
 
-CREATE TABLE `master_transaksi` (
+CREATE TABLE `master_penerimaan` (
   `id_master` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `bank_idcsv` int(11) NOT NULL,
@@ -580,9 +580,9 @@ ALTER TABLE `kelompok`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `master_transaksi`
+-- Indexes for table `master_penerimaan`
 --
-ALTER TABLE `master_transaksi`
+ALTER TABLE `master_penerimaan`
   ADD PRIMARY KEY (`id_master`,`bank_idcsv`,`nota_penerimaan_id`,`rekening_id`,`jenis_rekening_id`,`jenis_id`,`pejabat_id`,`e-lelang_id`,`focus_pn_id`,`kelompok_id`,`subjenis_id`,`nota_pengeluaran_id`) USING BTREE,
   ADD KEY `nota_penerimaan_id` (`nota_penerimaan_id`),
   ADD KEY `pejabat_id` (`pejabat_id`),
