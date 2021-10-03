@@ -8,7 +8,7 @@ class Pengesahan extends CI_Controller
 	{
 		parent::__construct();
 	
-		$this->load->model('Pengesahan_model');
+		$this->load->model('Pengesahan_model', 'pengesahan_m');
 		$this->load->model('Penerimaan_model', 'penerimaan_m');
 		$this->load->model('Jenis_model', 'jenis_m');
 		$this->load->model('master_penerimaan_model', 'master_penerimaan_m');
@@ -211,13 +211,22 @@ class Pengesahan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-	public function update() {
-		$this->form_validation->set_rules('tanggal_pengesahan', 'tanggal_pengesahan');
-		if ($this->form_validation->run()==true)
-		{
-			$id_np = $this->input->post('id_np');
-			$data['tanggal_pengesahan'] = $this->input->post('tanggal_pengesahan');
-			$this->pengesahan_m->update($data,$id_np);
+	function update(){
+		$id_np = $this->input->post('id_np');
+		$tanggal_pengesahan = $this->input->post('tanggal_pengesahan');
+		
+		$data = array(
+			'id_np' => $id_np,
+			'tanggal_pengesahan' => $tanggal_pengesahan,
+			
+		);
+	
+		$where = array(
+			'id_np' => $id_np
+		);
+	
+		$this->pengesahan_m->update($where,$data,'nota_penerimaan');
+		redirect('pengesahan/index');
 
 		}
 	
@@ -225,4 +234,4 @@ class Pengesahan extends CI_Controller
 
 	}
 	 
-}
+

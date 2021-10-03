@@ -23,6 +23,8 @@ class master_penerimaan_model extends CI_Model {
 	}
 
 	public function lihat_no_nota_penerimaan($nota_penerimaan_id){
+		$names= array('Kekurangan Hasil Bersih Lelang','Bea Lelang Pembeli','Bea Lelang Penjual','PPh');
+		$this->db->where_not_in('jenis_penerimaan', $names);
 		return $this->db->get_where($this->_table, ['nota_penerimaan_id' => $nota_penerimaan_id])->result();
 	}
 
@@ -31,9 +33,13 @@ class master_penerimaan_model extends CI_Model {
 	}
 
 	public function lihat_uraian($uraian){
+		$names= array('Pelunasan_Lelang');
+
 		$query = $this->db->select('*');
+		$this->db->where_not_in('jenis_penerimaan', $names);
 		$query = $this->db->where(['uraian' => $uraian]);
 		$query = $this->db->get($this->_table);
+		
 		return $query->row();
 }
 }

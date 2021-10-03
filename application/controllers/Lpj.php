@@ -10,6 +10,7 @@ class Lpj extends CI_Controller
 		
 		$this->load->model('Penerimaan_model', 'penerimaan_m');
 		$this->load->model('Lpj_model', 'Lpj_m');
+		$this->load->model('Bku_model', 'bku_m');
 		
 	}
 
@@ -18,11 +19,22 @@ class Lpj extends CI_Controller
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->data['title'] = 'Buku Kas Umum';
-		$data['query']= $this->Lpj_m->union_nota();
+		$data['query3']= $this->Lpj_m->union_nota();
 		$this->load->view('lpj/index', $data);
-
-
 		
 		$this->load->view('template/footer');
 	}
+	public function bku()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->data['title'] = 'Buku Kas Umum';
+	
+
+		$data['query4']= $this->bku_m->union_bku();
+		$this->load->view('lpj/bku', $data);
+
+		
+		$this->load->view('template/footer');
+}
 }

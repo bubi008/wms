@@ -1,71 +1,121 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="<?=base_url()?>/bootstrap/images/indonetsource.ico" type="image/gif">
+    <link rel="stylesheet" href="<?php echo base_url('bootstrap/font-awesome/css/font-awesome.min.css')?>">     
+    <link rel="stylesheet" href="<?php echo base_url('bootstrap/css/easion.css');?>">       
+    <link rel="stylesheet" href="<?php echo base_url('bootstrap/dist/css/bootstrap.min.css')?>"/> 
+    <title>Indonetsource - Date format Codeigniter</title>
 </head>
-
-<body id="page-top">
-	<div id="wrapper">
-		<!-- load sidebar -->
-	
-
-		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('penerimaan') ?>">
-				<!-- load Topbar -->
-
-
-				<div class="container-fluid">
-				<div class="clearfix">
-					<div class="float-left">
-						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
-					</div>
-					<div class="float-right">
-						<a href="<?= base_url('penerimaan/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
-						<a href="<?= base_url('penerimaan/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
-					</div>
-				</div>
-				<hr>
-				
-				<div class="card shadow">
-					<div class="card-header"><strong>Daftar RPHL</strong></div>
-					<div class="card-body">
-						<div class="table-responsive">
-							<table class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
-								<thead>
-									<tr>
-										<td>Nomor Nota</td>
-										<td>Tanggal</td>
-										<td>Jenis Nota</td>
-										<td>Nominal</td>
-										<td>Aksi</td>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($all_penerimaan as $penerimaan): ?>
-										<tr>
-											<td><?= $penerimaan->nomor ?></td>
-											<td><?= $penerimaan->tanggal_nota ?></td>
-											<td><?= $penerimaan->jenis_nota ?></td>
-
-											<td>Rp <?= number_format($penerimaan->nominal, 0, ',', '.') ?></td>
-											<td>
-												<a href="<?= base_url('penerimaan/detail/' . $penerimaan->nomor) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-												<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('penerimaan/hapus/' . $penerimaan->nomor) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-											</td>
-										</tr>
-									<?php endforeach ?>
-								</tbody>
-							</table>
-						</div>
-					</div>				
-				</div>
-				</div>
-			</div>
-			<!-- load footer -->
-	
-		</div>
-	</div>
-
-
+<body>
+    <div class="dash">
+        <div class="dash-nav dash-nav-dark">
+            <header>
+                <a href="#" class="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="https://www.indonetsource.com/" class="easion-logo" target="_blank" ><img width="30px" src="<?php echo base_url('bootstrap/images/indonetsource.png') ?>"><span>&nbspIndonetsource</span></a>
+            </header>
+            <nav class="dash-nav-list">
+                <a href="https://www.indonetsource.com/input-multiple-data-dengan-insert_batch-codeigniter/" target="_blank" class="dash-nav-item">
+                    <i class="fa fa-home"></i> Dashboard </a>
+                <div class="dash-nav-dropdown">
+                    <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+                        <i class="fa fa-server"></i> Example</a>
+                    <div class="dash-nav-dropdown-menu">
+                        <a href="<?php echo base_url('multiple_insert') ?>" class="dash-nav-dropdown-item">Input Data Multiple</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="dash-app">
+            <header class="dash-toolbar">
+                <a href="#" class="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="#!" class="searchbox-toggle">
+                    <i class="fa fa-search"></i>
+                </a>
+                <form class="searchbox" action="#!">
+                    <a href="#!" class="searchbox-toggle"> <i class="fa fa-arrow-left"></i> </a>
+                    <button type="submit" class="searchbox-submit"> <i class="fa fa-search"></i> </button>
+                    <input type="text" class="searchbox-input" placeholder="type to search">
+                </form>
+                <div class="tools">
+                    <a href="#!" class="tools-item">
+                        <i class="fa fa-bell"></i>                        
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="tools-item" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <a class="dropdown-item" href="#">hello...!!</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="dash-content">
+                <div class="container-fluid">
+                    <div class="card easion-card">
+                        <div class="card-header">
+                            <div class="easion-card-icon">
+                                <i class="fa fa-edit"></i>
+                            </div>
+                            <div class="easion-card-title"> Input Data Multiple</div>
+                        </div>
+                        <div class="card-body">
+                            <form action="tambah_rphl/input_data" method="post">
+                                <?php for ($i=0; $i<3; $i++) { ?>                                 
+                                <div class="form-group">                                    
+                                    <div class="input-group col-sm-8">
+                                    <label class="col-sm-2" >Jenis </label>              
+                                        <input class="col-sm-4" type="text" name="jenis_penerimaan[]" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="form-group">                                    
+                                    <div class="input-group col-sm-8">
+                                    <label class="col-sm-2" >Nominal</label>             
+                                        <input class="col-sm-5" type="text" name="nominal[]" class="form-control">
+                                    </div>
+                                </div>                      
+                                <br/>
+                                <?php
+                                    }
+                                ?>  
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary  btn-sm submit-reset">Simpan </button>                                                
+                                </div>  
+                            </form>  
+                            <div class="col-sm-5">
+                                <table class="table table-bordered">
+                                   <tr>
+                                       <th>No</th>
+                                       <th>Nama Jenis</th>
+                                       <th>Nominal</th>                                   
+                                   </tr>
+                                   <?php 
+                                    $no = 1;
+                                   foreach ($master_penerimaan as $key ): ?>
+                                    <tr>
+                                        <td><?php echo $no++ ?></td>
+                                        <td><?php echo $key->jenis_penerimaan; ?></td>
+                                        <td><?php echo $key->nominal; ?></td>                                    
+                                    </tr>
+                                   <?php endforeach ?>
+                               </table>
+                           </div>                    
+                        </div>
+                     </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="<?php echo base_url('bootstrap/js/jquery-3.3.1.slim.min.js')?>" ></script>
+    <script src="<?php echo base_url('bootstrap/js/popper.min.js')?>"></script>
+    <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js')?>"></script>
+    <script src="<?php echo base_url('bootstrap/js/easion.js')?>"></script>    
 </body>
 </html>

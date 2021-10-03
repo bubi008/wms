@@ -30,6 +30,8 @@ class Pengeluaran extends CI_Controller
 		$this->data['all_jenis'] = $this->jenis_m->view_pengeluaran();
 
 		$this->load->view('pengeluaran/index', $this->data);
+		$this->load->view('template/footer');
+
 	}
 
 	public function tambah()

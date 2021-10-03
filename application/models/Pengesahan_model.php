@@ -80,20 +80,9 @@ class Pengesahan_model extends CI_Model{
      * @param $data array to be update based on the passed parameters
      * @param $id num filter data
      */
-    public function update($data, $id_np) {
-        if(!empty($data) && !empty($id_np)){
-            // Add modified date if not included
-            if(!array_key_exists("modified", $data)){
-                $data['modified'] = date("Y-m-d H:i:s");
-            }
-            
-            // Update member data
-            $update = $this->db->update($this->table, $data, array('id_np' => $id_np));
-            
-            // Return the status
-            return $update?true:false;
-        }
-        return false;
+    function update($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
     }
     
     /*

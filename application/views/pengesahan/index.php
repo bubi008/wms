@@ -50,10 +50,12 @@
 											<td>Rp <?= number_format($penerimaan->nominal, 0, ',', '.') ?></td>
 											<td>
 												<a href="<?= base_url('pengesahan/detail/' . $penerimaan->nomor) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-												<input type="text" name="tanggal_pengesahan" value="<?= date('Y/m/d') ?>" readonly class="form-control">
-												<a href="<?= base_url('pengesahan/edit') ?>" class="btn btn-outline-success"><i class="fa fa-save"></i>&nbsp;&nbsp;Setuju</button>
-
-												</td>
+												<form action="<?= base_url('pengesahan/update') ?>"  method="POST">
+												<input type="text" name="tanggal_pengesahan" value="<?= date('Y-m-d') ?>" readonly class="form-control">
+												<button type="submit" class="btn btn-outline-success"><i class="fa fa-save">Setuju</button>
+											</form>	
+											</td>
+												
 											</td>
 										</tr>
 									<?php endforeach ?>
