@@ -41,7 +41,6 @@
             <div class="table-responsive">
               <table class="table table-sm table-bordered table-hover">
               <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css">
-
     
 
                 <thead>

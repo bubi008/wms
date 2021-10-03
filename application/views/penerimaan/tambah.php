@@ -276,7 +276,40 @@
 
 				if ($('tbody').children().length == 0) $('tfoot').hide()
 			})
+			$(document).on('click', '#tombol-tambah', function(e) {
+				var url_keranjang_bank = $('#content').data('url') + '/keranjang_bank'
+				$('#content').prop('contenteditable', true)
+				 data_keranjang = {
+					uraian: $('input[name="uraian"]').val(),
+					idcsv: $('input[name="idcsv"]').val(),
+					tanggal: $('input[name="tanggal"]').val(),
+					nama: $('input[name="nama"]').val(),
+					nominal: $('input[name="nominal"]').val(),
+					virtual_account: $('input[name="virtual_account"]').val(),
+					jumlah: $('input[name="jumlah"]').val(),
+					
+				}
+				if (parseInt($('input[name="max_hidden"]').val()) <= parseInt(data_keranjang.jumlah)) {
+					alert('data tidak tersedia! stok tersedia : ' + parseInt($('input[name="max_hidden"]').val()))
+				} else {
+					$.ajax({
+						url: url_keranjang_bank,
+						type: 'POST',
+						data: data_keranjang,
+						success: function(data) {
+							$('input[name="uraian"]').val()
+							$('input[name="tanggal"]').val(data.tanggal)
+							$('input[name="nama"]').val(data.nama)
+							$('input[name="virtual_account"]').val(data.virtual_account)
+							$('input[name="nominal"]').val(data.nominal)
+							$('input[name="idcsv"]').val(data.idcsv)
 
+							$('table#keranjang tbody').append(data)
+							$('tfoot').show()
+						}
+			})
+				}
+			}) 
 			$('button[type="submit"]').on('click', function() {
 				$('input[name="uraian"]').prop('disabled', true)
 				$('select[name="tanggal"]').prop('disabled', true)

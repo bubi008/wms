@@ -10,7 +10,7 @@
 	
 
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('lpj') ?>">
+			<div id="content" data-url="<?= base_url('lpj/bku') ?>">
 				<!-- load Topbar -->
 
 
@@ -21,7 +21,7 @@
 				<hr>
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 				<div class="card shadow">
-					<div class="card-header"><strong>Buku Kas Umum (Detail)</strong></div>
+					<div class="card-header"><strong>Buku Kas Umum </strong></div>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table  class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
@@ -42,12 +42,12 @@
 								<tbody class="tbody">
 									<?php 
 									$no=1;
-									foreach ($query3 as $row): ?>
+									foreach ($query4 as $row): ?>
 										<tr>
 											<td><?php echo $no++; ?></td>
 											<td><?php echo $row->tanggal_nota;?></td>
-											<td><?php echo $row->nota_penerimaan_id;?></td>
-											<td><?php echo $row->jenis_penerimaan;?></td>
+											<td><?php echo $row->nomor;?></td>
+											<td><?php echo $row->jenis_nota;?></td>
 											<td class="receipt" name="payment" id ="payment" align="right"><?php echo $row->nominal;?></td>
 											<td class="payment" name ="receipt" id ="receipt" align="right"><?php echo $row->nominal_lpj;?></td>
 											<td class="balance" id="balance" align="right"></td>

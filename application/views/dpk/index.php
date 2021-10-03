@@ -10,7 +10,7 @@
 	
 
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('lpj') ?>">
+			<div id="content" data-url="<?= base_url('Dpk') ?>">
 				<!-- load Topbar -->
 
 
@@ -21,7 +21,7 @@
 				<hr>
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 				<div class="card shadow">
-					<div class="card-header"><strong>Buku Kas Umum (Detail)</strong></div>
+					<div class="card-header"><strong>Buku Kas Pembantu Dana Pihak Ketiga (DPK)</strong></div>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table  class="table table-bordered" id="dataTable" width="50%" cellspacing="0">

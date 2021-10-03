@@ -12,7 +12,7 @@ class Penerimaan extends CI_Controller
 		$this->load->model('Penerimaan_model', 'penerimaan_m');
 		$this->load->model('master_penerimaan_model', 'master_penerimaan_m');
 		$this->load->model('Jenis_model', 'jenis_m');
-		$this->load->model('Lelang_rphl_model', 'lelang_rphl_m');
+		
 
 		$this->data['aktif'] = 'nota_penerimaan';
 	}
@@ -20,6 +20,7 @@ class Penerimaan extends CI_Controller
 	public function index()
 	{
         $this->load->view('template/header');
+		
         $this->load->view('template/sidebar');
 
 		$this->data['title'] = 'Data Nota Penerimaan';
@@ -29,6 +30,10 @@ class Penerimaan extends CI_Controller
 		$this->data['all_jenis'] = $this->jenis_m->view();
 
 		$this->load->view('penerimaan/index', $this->data);
+
+		$this->load->view('template/footer');
+
+		
 	}
 
 	public function tambah()
@@ -39,7 +44,6 @@ class Penerimaan extends CI_Controller
 		$this->data['title'] = 'Tambah Nota Penerimaan';
 		$this->data['all_bank'] = $this->bank_m->lihat_stok();
 		$this->data['all_jenis'] =$this->jenis_m->view_penerimaan();
-		$this->data['all_lelang_rphl'] =$this->lelang_rphl_m->view();
 
 
 		$this->load->view('penerimaan/tambah', $this->data);
@@ -65,6 +69,7 @@ class Penerimaan extends CI_Controller
 		for ($i = 0; $i < $jumlah_bank_dinotakan; $i++) {
 			array_push($data_master_penerimaan, ['bank_idcsv' => $this->input->post('idcsv_hidden')[$i]]);
 			$data_master_penerimaan[$i]['nota_penerimaan_id'] = $this->input->post('nomor');
+			$data_master_penerimaan[$i]['jenis_penerimaan'] = $this->input->post('nama_jenis');
 			$data_master_penerimaan[$i]['jenis_penerimaan'] = $this->input->post('nama_jenis');
 			$data_master_penerimaan[$i]['jumlah_transaksi'] = $this->input->post('jumlah_hidden')[$i];
 			$data_master_penerimaan[$i]['nominal'] = $this->input->post('nominal_hidden')[$i];
@@ -125,13 +130,7 @@ class Penerimaan extends CI_Controller
 	{
 		$data = $this->jenis_m->lihat_jenis($_POST['nama_jenis']);
 		echo json_encode($data);
-	}
-		public function tambah_rphl()
-	{
-		$this->load->view('template/header');
-        $this->load->view('template/sidebar');
-		$this->data['all_lelang_rphl'] =$this->lelang_rphl_m->view();
-		$this->load->view('penerimaan/tambah_rphl', $this->data);
+
 
 	}
 	public function keranjang_bank()
@@ -167,12 +166,13 @@ class Penerimaan extends CI_Controller
 		$dompdf->render();
 		$dompdf->stream('Nota Penerimaan' . date('d F Y'), array("Attachment" => false));
 	}
-	public function insert_batch(){
+	public function input_data(){
 		
 	$result = array();
-	foreach ($_POST['nominal'] as $key => $val) {
+	foreach ($_POST['nama_jenis'] as $key => $val) {
 	   $result[] = array(             
-		  'nominal' => $_POST['nominal'][$key],
+		  'nama_jenis' => $_POST['nama_jenis'][$key],
+		  'nominal' => $_POST['nominal'][$key]
 		);      
 	}
 		  $this->db->insert_batch('master_penerimaan',$result);
