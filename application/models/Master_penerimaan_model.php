@@ -9,6 +9,8 @@ class master_penerimaan_model extends CI_Model {
 		return $this->db->get();
 	}
 	public function lihat_stok(){
+		$names=array('Pelunasan_Lelang','');
+		$this->db->where_not_in('jenis_penerimaan', $names);
 		$query = $this->db->get_where($this->_table, 'jumlah_transaksi > 0');
 		return $query->result();
 	}

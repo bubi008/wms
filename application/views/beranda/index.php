@@ -103,3 +103,47 @@ Selamat Datang <?php echo ucwords ($this->session->userdata('nama_lengkap'));?> 
             <a href="<?= base_url('load-master'); ?>" class="btn btn-sm btn-outline-success">Data Selengkapnya</a>
   </div>
 </section>
+<div class="row">
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+          <h3> <?php echo $total_bank ?> </h3>
+            <p class="card-text mb-5">Verifikator                   </p>
+          </div>
+          <div class="card-footer p-2">
+            <a href="<?= base_url('bank/index'); ?>" class="btn btn-sm btn-outline-success">Data Selengkapnya</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h2><?php echo $total_nota_pengeluaran ?></h2>
+            <p class="card-text mb-5">Pengeluaran Otorisator</p>
+          </div>
+          <div class="card-footer p-2">
+            <a href="<?= base_url('pengeluaran'); ?>" class="btn btn-sm btn-outline-success">Data Selengkapnya</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h2>50</h2>
+            <p class="card-text mb-5">Bendahara              </p>
+          </div>
+          <div class="card-footer p-2">
+            <a href="<?= base_url('bendahara'); ?>" class="btn btn-sm btn-outline-success">Data Selengkapnya</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h2>1.287</h2>
+            <p class="card-text mb-5">Load Master            </p>
+          </div>
+          <div class="card-footer p-2">
+            <a href="<?= base_url('load-master'); ?>" class="btn btn-sm btn-outline-success">Data Selengkapnya</a>
+  </div>
+  </section>

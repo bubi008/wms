@@ -8,6 +8,7 @@ class Dpk_model extends CI_Model {
         
         $this->db->having('jenis_penerimaan','Uang Jaminan Lelang');
         $this->db->or_having('jenis_penerimaan','Setoran');
+        $this->db->or_having('jenis_penerimaan','Kekurangan Hasil Bersih Lelang');
         $this->db->from('master_penerimaan');
         $query1 = $this->db->get_compiled_select();
         

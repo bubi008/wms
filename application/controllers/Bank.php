@@ -19,8 +19,10 @@ class Bank extends CI_Controller {
     
     $this->load->view('template/header');
     $this->load->view('template/sidebar');
-    $data = array();
-        
+
+
+
+    $data = array();   
     // Get messages from the session
     if($this->session->userdata('success_msg')){
         $data['success_msg'] = $this->session->userdata('success_msg');
@@ -84,11 +86,13 @@ $config['first_tag_close'] = '</li>';
         $conditions['returnType'] = '';
         $conditions['start'] = $offset;
         $conditions['limit'] = $this->perPage;
+        
+$this->db->having('stok=3');
         $data['bank'] = $this->Bank_model->getRows($conditions);
         $data['title'] = 'bank list';
 
 
-
+   
     $this->load->view('bank/index', $data);
 
 	$this->load->view('template/footer');
@@ -96,7 +100,7 @@ $config['first_tag_close'] = '</li>';
   
   public function view($idcsv){
     $data = array();
-    
+
     // Check whether member id is not empty
     if(!empty($idcsv)){
         $data['member'] = $this->bank_model->getRows(array('idcsv' => $idcsv));;

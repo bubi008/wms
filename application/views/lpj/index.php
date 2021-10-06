@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="<?php echo base_url('assets/bootstrap-datepicker/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet">
 
 </head>
 
@@ -12,7 +13,31 @@
 		<div id="content-wrapper" class="d-flex flex-column">
 			<div id="content" data-url="<?= base_url('lpj') ?>">
 				<!-- load Topbar -->
-
+				<div class="container">
+	<div class="row" style="margin-top: 50px;">
+		<div class="col-md-12" style="margin-bottom: 20px">
+		<form method="get" action="<?php echo base_url('lpj/index') ?>">
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                        <label>Filter Tanggal</label>
+                        <div class="input-group">
+                            <input type="date" name="tgl_awal" value="<?= @$_GET['tgl_awal'] ?>" class="form-control tgl_awal" placeholder="Tanggal Awal" autocomplete="off">
+                            <span class="input-group-addon"> s/d </span>
+                            <input type="date" format="Y-m-d" name="tgl_akhir" value="<?= @$_GET['tgl_akhir'] ?>" class="form-control tgl_akhir" placeholder="Tanggal Akhir" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" name="filter" value="true" class="btn btn-primary">TAMPILKAN</button>
+            <?php
+            if(isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
+                echo '<a href="'.base_url('lpj/index').'" class="btn btn-default">RESET</a>';
+            ?>
+				  </div>
+				</div>
+			</div>
+		</div>
 
 		
 					</div>
@@ -79,8 +104,14 @@
 
 
 </body>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</body>
 <script>
+	
 	 $(document).ready(function() {
 	var currentBalance = 0;
 	$('table tbody tr').each(function() {             //Loop thru each row
@@ -95,5 +126,6 @@
 
   });
 })
+
 </script>
 </html>

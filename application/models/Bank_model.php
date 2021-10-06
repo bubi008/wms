@@ -7,6 +7,7 @@ class Bank_model extends CI_Model {
    
   function getRows($params = array()){
     $this->db->select('*');
+    
     $this->db->from($this->_table);
     
     if(array_key_exists("conditions", $params)){
@@ -35,8 +36,9 @@ class Bank_model extends CI_Model {
             }elseif(!array_key_exists("start",$params) && array_key_exists("limit",$params)){
                 $this->db->limit($params['limit']);
             }
-            
+          
             $query = $this->db->get();
+            
             $result = ($query->num_rows() > 0)?$query->result_array():FALSE;
         }
     }
@@ -45,8 +47,12 @@ class Bank_model extends CI_Model {
     return $result;
 }
 public function view(){
-    return $this->db->get('bank')->result();
+  $this->db->having('stok=3');
+  return $this->db->get('bank')->result();
     $data = array();
+   
+
+    
         
         // Check whether member id is not empty
         if(!empty($idcsv)){

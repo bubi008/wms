@@ -40,5 +40,27 @@ public function view(){
     return $this->db->get('query3')->result();
     $data = array();
 }
+public function view_by_date($tgl_awal, $tgl_akhir){
+    $names=array('Pelunasan_Lelang','');
+    $this->db->select('tanggal_nota, nota_penerimaan_id,jenis_penerimaan, nominal, nominal_lpj');
+    
+    $this->db->where_not_in('jenis_penerimaan', $names);
+    $this->db->from('master_penerimaan');
+    $query1 = $this->db->get_compiled_select();
+    
+    $this->db->select('tanggal_pengeluaran, nota_pengeluaran_id, jenis_pengeluaran, nominal_pengeluaran_lpj, nominal_pengeluaran');
+    $this->db->from('master_pengeluaran');
+    $query2 = $this->db->get_compiled_select();
 
+    
+    $query3 = $this->db->query($query1 . ' UNION ALL ' . $query2 . 'ORDER BY ' . 'tanggal_nota' );
+    return $query3->result();
+
+    $tgl_awal = $this->db->escape($tgl_awal);
+    $tgl_akhir = $this->db->escape($tgl_akhir);
+    $this->db->where('DATE(tanggal_nota) BETWEEN '.$tgl_awal.' AND '.$tgl_akhir); // Tambahkan where tanggal nya
+return $this->db->get('query3')->result();
+// Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+
+}
 }

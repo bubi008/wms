@@ -31,7 +31,7 @@
                                     <div class="form-group">                                    
                                     <div class="input-group col-sm-8">
                                     <label class="col-sm-2" >Tanggal NP </label>             
-                                        <input class="col-sm-4" type="date" name="tanggal_nota[]" class="form-control" >
+                                        <input class="col-sm-4" type="date" name="tanggal_nota[]" class="form-control" value="<?= date('Y/m/d') ?>">
                                 </div> 
                                     <div class="form-group">                                    
                                     <div class="input-group col-sm-8">
