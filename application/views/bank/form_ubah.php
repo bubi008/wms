@@ -30,7 +30,7 @@
         </tr>
         <tr>
           <td>Uraian</td>
-          <td><input type="text" name="input_uraian" value="<?php echo set_value('input_uraian', $bank->uraian); ?>"></td>
+          <td><input type="text" name="input_uraian" size="150" value="<?php echo set_value('input_uraian', $bank->uraian); ?>"></td>
         </tr>
         <td>Virtual Account</td>
           <td><input type="text" name="input_virtual_account" value="<?php echo set_value('input_virtual_account', $bank->virtual_account); ?>"></td>

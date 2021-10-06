@@ -77,21 +77,51 @@
 		<div>
 			<br>
 			<br>
-		<style>
-        .tab4 {
-            tab-size: 100;
-        }
-    </style>
-<p>
-	<pre class="tab4"> Verifikator																							Kepala Seksi Hukum dan Informasi </pre>    
-</p>
-<br>
-<br>
-<br>
-<p>
-<pre class="tab4"> Rudi																														Johny </pre>    
-</p>
+			<style>
+table, td, th {
+  border: 0;
+}
 
-	</div>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  height: 200px;
+}
+</style>
+</head>
+<body>
+
+
+
+<table>
+  <tr>
+    <th>Verifikator</th>
+    <th></th>
+    <th>Kepala Seksi Hukum dan Informasi</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td align="center">Andi Jacob</td>
+    <td></td>
+    <td align="center">Martin De Miral</td>
+  </tr>
+</table>
 </body>
 </html>
